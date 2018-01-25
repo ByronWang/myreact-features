@@ -1,5 +1,7 @@
 import React from "react";
 import Types from "./Types.js";
+import * as FormLayout from "./FormTableLayout.js";
+import PropTypes from "prop-types";
 
 /*let FieldTypes = {
     string:TextField,
@@ -36,10 +38,25 @@ var FieldTypes = {
   }
 };
 
+class Form extends React.Component {
+  getChildContext() {
+    return { rowLayout: FormLayout.RowLayout };
+  }
+
+  render() {
+    let Layout = FormLayout.FormLayout;
+    return <Layout title={this.props.name}>{this.props.children}</Layout>;
+  }
+}
+
+Form.childContextTypes = {
+  rowLayout: PropTypes.any
+};
+
 class Field extends React.Component {
   constructor(props) {
     super(props);
-    const { type,layout, ...other } = props;
+    const { type, layout, ...other } = props;
     this.typeName = type;
     this.other = other;
     this.type = Types[this.typeName];
@@ -58,29 +75,31 @@ class Field extends React.Component {
 
   render() {
     let TargetFieldType = FieldTypes.match(this.typeName) || "input";
-    let Layout = this.layout;
+    let RowLayout = this.context.rowLayout;
     console.log(this.props);
     return (
-      <Layout title={this.props.name}>
-          <TargetFieldType {...this.extProps} {...this.other} />
-      </Layout>
+      <RowLayout title={this.props.name}>
+        <TargetFieldType {...this.extProps} {...this.other} />
+      </RowLayout>
     );
   }
 }
+Field.contextTypes = {
+  rowLayout: PropTypes.any
+};
 
 function TextField(props) {
-    return <input placeholder="TextField" {...props} />;
+  return <input placeholder="TextField" {...props} />;
 }
 TextField.supportedTypes = ["String"];
 
-
-function NameField (props) {
-    return <input placeholder="NameField" {...props} />;
+function NameField(props) {
+  return <input placeholder="NameField" {...props} />;
 }
 NameField.supportedTypes = ["Name"];
 
-function PersonNameField (props) {
-    return <input placeholder="PersonNameField" {...props} />;
+function PersonNameField(props) {
+  return <input placeholder="PersonNameField" {...props} />;
 }
 PersonNameField.supportedTypes = ["PersonName"];
 
@@ -89,4 +108,4 @@ FieldTypes.register(TextField, NameField, PersonNameField);
 console.log(FieldTypes);
 console.log(`FieldTypes.match("Text").name ${FieldTypes.match("Text").name}`);
 
-export default Field;
+export { Form, Field };
