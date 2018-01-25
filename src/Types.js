@@ -1,6 +1,3 @@
-import React from "react";
-
-
 class Type {
   constructor(name, attrs={},baseType=undefined) {
     this.name = name;
@@ -27,17 +24,19 @@ const Types = {
     }else {
       this[name] = new Type(name,attrs);
     }
+    return this[name];
   },
   addAll: function(list){
     list.map((type)=>{
       let [name,attrs,baseType] = type;
-      this.add(name,attrs,baseType);
+      return this.add(name,attrs,baseType);
     });
   }
 }
 
 Types.add("String",{minLenght:0});
 Types.add("Text",{maxLength:4098},"String");
+Types.add("Comment",{maxLength:4098},"String");
 Types.add("Long");
 Types.add("Age",{min:0,regularMax:150});
 Types.add("Decimal");
