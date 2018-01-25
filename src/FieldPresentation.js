@@ -1,7 +1,7 @@
-import React from "react";
-import Types from "./Types.js";
-import * as FormLayout from "./FormTableLayout.js";
-import PropTypes from "prop-types";
+import React from 'react';
+import Types from './Types.js';
+import * as FormLayout from './FormTableLayout';
+import PropTypes from 'prop-types';
 
 /*let FieldTypes = {
     string:TextField,
@@ -64,17 +64,17 @@ class Field extends React.Component {
 
     this.extProps = {};
     if (this.type) {
-      if (this.type.attr("minLength")) {
+      if (this.type.attr('minLength')) {
         this.extProps.minLength = this.type.minLength;
       }
-      if (this.type.attr("maxLength")) {
+      if (this.type.attr('maxLength')) {
         this.extProps.maxLength = this.type.maxLength;
       }
     }
   }
 
   render() {
-    let TargetFieldType = FieldTypes.match(this.typeName) || "input";
+    let TargetFieldType = FieldTypes.match(this.typeName) || 'input';
     let RowLayout = this.context.rowLayout;
     console.log(this.props);
     return (
@@ -91,21 +91,21 @@ Field.contextTypes = {
 function TextField(props) {
   return <input placeholder="TextField" {...props} />;
 }
-TextField.supportedTypes = ["String"];
+TextField.supportedTypes = ['String'];
 
 function NameField(props) {
   return <input placeholder="NameField" {...props} />;
 }
-NameField.supportedTypes = ["Name"];
+NameField.supportedTypes = ['Name'];
 
 function PersonNameField(props) {
   return <input placeholder="PersonNameField" {...props} />;
 }
-PersonNameField.supportedTypes = ["PersonName"];
+PersonNameField.supportedTypes = ['PersonName'];
 
 FieldTypes.register(TextField, NameField, PersonNameField);
 
 console.log(FieldTypes);
-console.log(`FieldTypes.match("Text").name ${FieldTypes.match("Text").name}`);
+console.log(`FieldTypes.match("Text").name ${FieldTypes.match('Text').name}`);
 
 export { Form, Field };

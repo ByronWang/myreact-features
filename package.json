@@ -5,6 +5,9 @@
   "proxy": "http://localhost:4000",
   "dependencies": {
     "flow-bin": "^0.63.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.1",
+    "prettier": "^1.10.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
@@ -14,6 +17,7 @@
   },
   "scripts": {
     "flow": "flow",
+    "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -27,7 +31,15 @@
     "@storybook/addons": "^3.3.9",
     "@storybook/react": "^3.3.9",
     "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "flow-bin": "^0.42.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   }
 }
