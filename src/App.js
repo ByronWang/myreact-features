@@ -2,16 +2,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
+import Sample2Form from './nebula/Sample2Form';
 import SampleForm from './SampleForm';
-import { renderToString } from 'react-dom/server';
-import { renderToStaticMarkup } from 'react-dom/server';
+import Calculator from './Calculator';
 
 const BasicExample = () => (
   <div>
-    <div id="react-target">${renderToString(<SampleForm />)}</div>
+    <Calculator />
+    <Sample2Form />
+    <hr />
     <Router>
       <div>
-        <SampleForm />
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -22,9 +23,6 @@ const BasicExample = () => (
           <li>
             <Link to="/topics">Topics</Link>
           </li>
-          <li>
-            <Link to="/sampleForm">SampleForm</Link>
-          </li>
         </ul>
 
         <hr />
@@ -32,7 +30,6 @@ const BasicExample = () => (
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/topics" component={Topics} />
-        <Route path="/sampleForm" component={SampleForm} />
       </div>
     </Router>
   </div>

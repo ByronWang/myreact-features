@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function RowLayout(props) {
   return (
@@ -15,11 +15,9 @@ function FormLayout(props) {
   return (
     <div>
       <h2>{props.title}</h2>
-      <form>
-        <table>
-          <tbody>{props.children}</tbody>
-        </table>
-      </form>
+      <table>
+        <tbody>{props.children}</tbody>
+      </table>
     </div>
   );
 }
