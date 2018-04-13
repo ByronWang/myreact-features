@@ -14,6 +14,40 @@ let Entity = {
         name: 'Address',
         fields: [
           { name: 'City', type: 'Name' },
+          { name: 'Name', type: 'Name' },
+          { name: 'Age', type: 'Age' },
+          { name: 'Height', type: 'Long' },
+          { name: 'Comment', type: 'Comment' },
+          { name: 'Prinvance', type: 'Name' }
+        ]
+      }
+    },
+    {
+      fieldType: 'EmbedEntity',
+      name: 'Address1',
+      type: {
+        name: 'Address',
+        fields: [
+          { name: 'City', type: 'Name' },
+          { name: 'Name', type: 'Name' },
+          { name: 'Age', type: 'Age' },
+          { name: 'Height', type: 'Long' },
+          { name: 'Comment', type: 'Comment' },
+          { name: 'Prinvance', type: 'Name' }
+        ]
+      }
+    },
+    {
+      fieldType: 'EmbedEntity',
+      name: 'Address2',
+      type: {
+        name: 'Address',
+        fields: [
+          { name: 'City', type: 'Name' },
+          { name: 'Name', type: 'Name' },
+          { name: 'Age', type: 'Age' },
+          { name: 'Height', type: 'Long' },
+          { name: 'Comment', type: 'Comment' },
           { name: 'Prinvance', type: 'Name' }
         ]
       }

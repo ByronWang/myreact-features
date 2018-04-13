@@ -37,6 +37,34 @@ var FieldTypes = {
   }
 };
 
+let setValue = function(dest, name, value) {
+  // console.log(`name=${name} value=${value}`)
+  // let i = name.indexOf(".");
+  // if(i<0){
+  dest[name] = value;
+  return dest;
+  // }else{
+  //   let parent = name.substr(0,i);
+  //   if(!dest[parent]){
+  //     dest[parent] = {};
+  //   }
+  //    setValue(dest[parent],name.substr(i+1),value);
+  //    return dest;
+  // }
+};
+let getValue = function(dest, name) {
+  // let i = name.indexOf(".");
+  // if(i<0){
+  return dest[name];
+  // }else{
+  //   let parent = name.substr(0,i);
+  //   if(!dest[parent]){
+  //     return undefined;
+  //   }
+  //   return getValue(dest[parent],name.substr(i+1));
+  // }
+};
+
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -48,9 +76,7 @@ class Form extends React.Component {
   }
 
   initInput(name, value) {
-    this.setState({
-      [name]: value
-    });
+    setValue(this.state, name, value);
   }
 
   handleInputChange(event) {
@@ -58,9 +84,7 @@ class Form extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
+    this.setState(setValue({}, name, value));
     console.log(this.state);
   }
 
@@ -78,7 +102,7 @@ class Form extends React.Component {
     };
   }
   getState(name) {
-    return this.state[name] || '';
+    return getValue(this.state, name);
   }
   render() {
     console.log(`render form ${this.props.name}`);
@@ -117,7 +141,10 @@ class Field extends React.Component {
       }
     }
     this.extProps.placeholder = `Please input ${props.name}`;
-    console.log(this.context);
+  }
+  componentWillMount() {
+    console.log('componentWillMount');
+    this.context.initInput(this.props.name, '');
   }
 
   render() {
